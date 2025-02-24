@@ -17,11 +17,16 @@ public interface BankAccount {
      */
     double getBalance();
 
+    /**
+     * Returns the fee applied on every withdraw
+     * @return the withdrawal fee
+     */
     double getFee();
 
     /**
      * Allows the deposit of an amount on the account, if the given userID corresponds to the register holder ID
-     * of the bank account. This ID acts like an "identification token" .
+     * of the bank account. This ID acts like an "identification token". If the amount is not positive or the userID is
+     * invalid, the operation will not be executed.
      *
      * @param userID the id of the user that wants do the deposit
      * @param amount the amount of the deposit
@@ -30,7 +35,8 @@ public interface BankAccount {
 
     /**
      * Allows the withdrawal of an amount from the account, if the given userID corresponds to the register holder ID
-     * of the bank account. This ID acts like an "identification token" .
+     * of the bank account. This ID acts like an "identification token". If the amount is not positive or the userID is
+     * invalid, the operation will not be executed.
      *
      * @param userID the id of the user that wants do the withdrawal
      * @param amount the amount of the withdrawal
