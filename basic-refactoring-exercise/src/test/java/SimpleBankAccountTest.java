@@ -61,4 +61,11 @@ final class SimpleBankAccountTest {
         bankAccount.withdraw(WRONG_HOLDER_ID, AMOUNT_TO_WITHDRAW);
         assertEquals(AMOUNT, bankAccount.getBalance());
     }
+
+    @Test
+    void testWithdrawWithWrongAmount() {
+        bankAccount.deposit(accountHolder.getId(), AMOUNT);
+        bankAccount.withdraw(accountHolder.getId(), 2 * AMOUNT);
+        assertEquals(AMOUNT, bankAccount.getBalance());
+    }
 }
