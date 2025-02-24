@@ -17,6 +17,8 @@ public interface BankAccount {
      */
     double getBalance();
 
+    double getFee();
+
     /**
      * Allows the deposit of an amount on the account, if the given userID corresponds to the register holder ID
      * of the bank account. This ID acts like an "identification token" .

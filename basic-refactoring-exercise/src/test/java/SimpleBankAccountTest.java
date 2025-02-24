@@ -21,7 +21,7 @@ final class SimpleBankAccountTest {
     @BeforeEach
     void beforeEach() {
         accountHolder = new AccountHolder("Mario", "Rossi", 1);
-        bankAccount = new SimpleBankAccount(accountHolder, EMPTY_BALANCE);
+        bankAccount = new SimpleBankAccount(accountHolder, EMPTY_BALANCE, 1);
     }
 
     @Test
@@ -52,7 +52,7 @@ final class SimpleBankAccountTest {
     void testWithdraw() {
         bankAccount.deposit(accountHolder.getId(), AMOUNT);
         bankAccount.withdraw(accountHolder.getId(), AMOUNT_TO_WITHDRAW);
-        assertEquals(AMOUNT - AMOUNT_TO_WITHDRAW, bankAccount.getBalance());
+        assertEquals(AMOUNT - AMOUNT_TO_WITHDRAW - bankAccount.getFee(), bankAccount.getBalance());
     }
 
     @Test
