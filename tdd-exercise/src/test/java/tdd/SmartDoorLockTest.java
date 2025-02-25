@@ -28,6 +28,11 @@ public final class SmartDoorLockTest {
     }
 
     @Test
+    void testSetInvalidPin() {
+        assertThrows(IllegalArgumentException.class, () -> this.smartDoorLock.setPin(123));
+    }
+
+    @Test
     void testLockDoorWithUnsetPin() {
         assertThrows(IllegalStateException.class, () -> this.smartDoorLock.lock());
     }

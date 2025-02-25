@@ -2,9 +2,17 @@ package tdd.implementation;
 
 import tdd.SmartDoorLock;
 
+interface Pin {}
+
 public final class SmartDoorLockImpl implements SmartDoorLock {
 
-    private record Pin(int pin) { }
+    private record FourDigitPin(int pin) implements Pin {
+        public FourDigitPin {
+            if (pin <= 1000 || pin > 9999) {
+                throw new IllegalArgumentException("PIN must be a 4-digit number");
+            }
+        }
+    }
 
     private enum LockState {
         LOCKED, UNLOCKED, BLOCKED
@@ -21,8 +29,8 @@ public final class SmartDoorLockImpl implements SmartDoorLock {
     }
 
     @Override
-    public void setPin(final int pin) {
-        this.pin = new Pin(pin);
+    public void setPin(final int pin) throws IllegalArgumentException {
+        this.pin = new FourDigitPin(pin);
     }
 
     @Override
@@ -77,7 +85,7 @@ public final class SmartDoorLockImpl implements SmartDoorLock {
     }
 
     private boolean pinIsIncorrect(final int pin) {
-        final var givenPin = new Pin(pin);
+        final var givenPin = new FourDigitPin(pin);
         return !this.pin.equals(givenPin);
     }
 
