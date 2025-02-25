@@ -91,4 +91,16 @@ public final class SmartDoorLockTest {
         assertTrue(this.smartDoorLock.isBlocked());
     }
 
+    @Test
+    void testResetDoorLock() {
+        this.smartDoorLock.setPin(PIN);
+        this.smartDoorLock.lock();
+        this.smartDoorLock.unlock(WRONG_PIN);
+        this.smartDoorLock.reset();
+        assertAll(
+            () -> assertFalse(this.smartDoorLock.isLocked()),
+            () -> assertEquals(0, this.smartDoorLock.getFailedAttempts()),
+            () -> assertThrows(IllegalStateException.class, () -> this.smartDoorLock.lock())
+        );
+    }
 }

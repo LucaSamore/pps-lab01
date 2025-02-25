@@ -57,7 +57,7 @@ public final class SmartDoorLockImpl implements SmartDoorLock {
 
     @Override
     public int getMaxAttempts() {
-        return 0;
+        return this.maxAttempts;
     }
 
     @Override
@@ -67,7 +67,9 @@ public final class SmartDoorLockImpl implements SmartDoorLock {
 
     @Override
     public void reset() {
-
+        this.pin = null;
+        this.failedAttempts = 0;
+        this.lockState = LockState.UNLOCKED;
     }
 
     private boolean pinIsNotSet() {
