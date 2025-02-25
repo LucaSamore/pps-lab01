@@ -8,6 +8,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public final class SmartDoorLockTest {
 
+    private static final int PIN = 1644;
     private static final int MAX_ATTEMPTS = 10;
 
     private SmartDoorLock smartDoorLock;
@@ -29,20 +30,30 @@ public final class SmartDoorLockTest {
 
     @Test
     void testLockDoor() {
-        this.smartDoorLock.setPin(1644);
+        this.smartDoorLock.setPin(PIN);
         this.smartDoorLock.lock();
         assertTrue(this.smartDoorLock.isLocked());
     }
 
     @Test
     void testUnlockDoorWithCorrectPin() {
-        final var pin = 1644;
-        this.smartDoorLock.setPin(pin);
+        this.smartDoorLock.setPin(PIN);
         this.smartDoorLock.lock();
-        this.smartDoorLock.unlock(pin);
+        this.smartDoorLock.unlock(PIN);
         assertAll(
             () -> assertFalse(this.smartDoorLock.isLocked()),
             () -> assertEquals(0, this.smartDoorLock.getFailedAttempts())
+        );
+    }
+
+    @Test
+    void testUnlockDoorWithIncorrectPin() {
+        this.smartDoorLock.setPin(PIN);
+        this.smartDoorLock.lock();
+        this.smartDoorLock.unlock(1234);
+        assertAll(
+            () -> assertTrue(this.smartDoorLock.isLocked()),
+            () -> assertEquals(1, this.smartDoorLock.getFailedAttempts())
         );
     }
 
