@@ -52,7 +52,7 @@ public final class SmartDoorLockImpl implements SmartDoorLock {
 
     @Override
     public boolean isBlocked() {
-        return false;
+        return this.lockState == LockState.BLOCKED;
     }
 
     @Override
