@@ -4,9 +4,9 @@ import example.model.AccountHolder;
 import example.model.BankAccount;
 import example.model.SimpleBankAccount;
 
-public class Main {
+public final class Main {
 
-    public static void main(String[] args) {
+    public static void main(final String... args) {
         final AccountHolder accountHolder = new AccountHolder("Mario", "Rossi", 1);
         final BankAccount bankAccount = new SimpleBankAccount(accountHolder, 0, 1);
         bankAccount.deposit(accountHolder.getId(), 100);

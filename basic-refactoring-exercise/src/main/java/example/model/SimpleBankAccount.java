@@ -34,10 +34,9 @@ public final class SimpleBankAccount implements BankAccount {
 
     @Override
     public void deposit(final int userID, final double amount) {
-        if (!checkUser(userID) || !checkAmount(amount)) {
-            return;
+        if (checkUser(userID) && checkAmount(amount)) {
+            this.balance += amount;
         }
-        this.balance += amount;
     }
 
     @Override
