@@ -19,8 +19,11 @@ public final class SmartDoorLockTest {
     }
 
     @Test
-    void testDoorIsInitiallyUnlocked() {
-        assertFalse(this.smartDoorLock.isLocked());
+    void testInitialState() {
+        assertAll(
+            () -> assertFalse(this.smartDoorLock.isLocked()),
+            () -> assertEquals(0, this.smartDoorLock.getFailedAttempts())
+        );
     }
 
     @Test
