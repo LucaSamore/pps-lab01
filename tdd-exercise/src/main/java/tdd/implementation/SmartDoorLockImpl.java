@@ -21,17 +21,22 @@ public final class SmartDoorLockImpl implements SmartDoorLock {
     }
 
     @Override
-    public void setPin(int pin) {
+    public void setPin(final int pin) {
         this.pin = new Pin(pin);
     }
 
     @Override
-    public void unlock(int pin) {
-
+    public void unlock(final int pin) {
+        // ! TODO: check if door is locked
+        if (pinIsIncorrect(pin)) {
+            handleFailedAttempt();
+            return;
+        }
+        this.lockState = LockState.UNLOCKED;
     }
 
     @Override
-    public void lock() {
+    public void lock() throws IllegalStateException {
         if (pinIsNotSet()) {
             throw new IllegalStateException("PIN is not set");
         }
@@ -55,7 +60,7 @@ public final class SmartDoorLockImpl implements SmartDoorLock {
 
     @Override
     public int getFailedAttempts() {
-        return 0;
+        return this.failedAttempts;
     }
 
     @Override
@@ -65,5 +70,17 @@ public final class SmartDoorLockImpl implements SmartDoorLock {
 
     private boolean pinIsNotSet() {
         return this.pin == null;
+    }
+
+    private boolean pinIsIncorrect(final int pin) {
+        final var givenPin = new Pin(pin);
+        return !this.pin.equals(givenPin);
+    }
+
+    private void handleFailedAttempt() {
+        this.failedAttempts++;
+        if (this.failedAttempts >= this.maxAttempts) {
+            this.lockState = LockState.BLOCKED;
+        }
     }
 }

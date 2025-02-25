@@ -33,4 +33,17 @@ public final class SmartDoorLockTest {
         this.smartDoorLock.lock();
         assertTrue(this.smartDoorLock.isLocked());
     }
+
+    @Test
+    void testUnlockDoorWithCorrectPin() {
+        final var pin = 1644;
+        this.smartDoorLock.setPin(pin);
+        this.smartDoorLock.lock();
+        this.smartDoorLock.unlock(pin);
+        assertAll(
+            () -> assertFalse(this.smartDoorLock.isLocked()),
+            () -> assertEquals(0, this.smartDoorLock.getFailedAttempts())
+        );
+    }
+
 }
