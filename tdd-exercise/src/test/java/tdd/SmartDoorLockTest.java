@@ -57,4 +57,24 @@ public final class SmartDoorLockTest {
         );
     }
 
+    @Test
+    void testUnlockAlreadyUnlockedDoorWithCorrectPin() {
+        this.smartDoorLock.setPin(PIN);
+        this.smartDoorLock.unlock(PIN);
+        assertAll(
+            () -> assertFalse(this.smartDoorLock.isLocked()),
+            () -> assertEquals(0, this.smartDoorLock.getFailedAttempts())
+        );
+    }
+
+    @Test
+    void testUnlockAlreadyUnlockedDoorWithIncorrectPin() {
+        this.smartDoorLock.setPin(PIN);
+        this.smartDoorLock.unlock(1234);
+        assertAll(
+            () -> assertFalse(this.smartDoorLock.isLocked()),
+            () -> assertEquals(0, this.smartDoorLock.getFailedAttempts())
+        );
+    }
+
 }

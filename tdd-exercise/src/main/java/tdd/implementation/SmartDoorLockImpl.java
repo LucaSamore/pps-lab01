@@ -27,7 +27,9 @@ public final class SmartDoorLockImpl implements SmartDoorLock {
 
     @Override
     public void unlock(final int pin) {
-        // ! TODO: check if door is locked
+        if (!isLocked()) {
+            return;
+        }
         if (pinIsIncorrect(pin)) {
             handleFailedAttempt();
             return;
