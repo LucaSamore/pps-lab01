@@ -29,10 +29,12 @@ public final class MinMaxStackImpl implements MinMaxStack {
 
     @Override
     public int pop() {
-        if (this.stack.isEmpty()) {
+        if (stack.isEmpty()) {
             throw new IllegalStateException("Stack is empty");
         }
-        return this.stack.pop();
+        minStack.pop();
+        maxStack.pop();
+        return stack.pop();
     }
 
     @Override

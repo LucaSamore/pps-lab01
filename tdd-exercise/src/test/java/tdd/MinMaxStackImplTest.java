@@ -95,4 +95,26 @@ final class MinMaxStackImplTest {
         assertThrows(IllegalStateException.class, () -> this.stack.getMax());
     }
 
+    @Test
+    void testGetMinWithDifferentStackStatus() {
+        final var elements = List.of(3, 2, 1);
+        elements.forEach(this.stack::push);
+        assertAll(
+            () -> assertEquals(1, this.stack.getMin()),
+            () -> assertEquals(1, this.stack.pop()),
+            () -> assertEquals(2, this.stack.getMin())
+        );
+    }
+
+    @Test
+    void testGetMaxWithDifferentStackStatus() {
+        final var elements = List.of(1, 2, 3);
+        elements.forEach(this.stack::push);
+        assertAll(
+            () -> assertEquals(3, this.stack.getMax()),
+            () -> assertEquals(3, this.stack.pop()),
+            () -> assertEquals(2, this.stack.getMax())
+        );
+    }
+
 }
