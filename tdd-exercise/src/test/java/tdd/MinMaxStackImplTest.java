@@ -3,7 +3,9 @@ package tdd;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import tdd.implementation.MinMaxStackImpl;
-import tdd.implementation.SmartDoorLockImpl;
+
+import java.util.Collections;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -67,6 +69,18 @@ final class MinMaxStackImplTest {
     @Test
     void testPeekEmptyStack() {
         assertThrows(IllegalStateException.class, () -> this.stack.peek());
+    }
+
+    @Test
+    void testGetMin() {
+        final var elements = List.of(1, 2, 3);
+        elements.forEach(this.stack::push);
+        assertEquals(Collections.min(elements), this.stack.getMin());
+    }
+
+    @Test
+    void testGetMinWithEmptyStack() {
+        assertThrows(IllegalStateException.class, () -> this.stack.getMin());
     }
 
 }

@@ -2,16 +2,29 @@ package tdd.implementation;
 
 import tdd.MinMaxStack;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Stack;
 
 public final class MinMaxStackImpl implements MinMaxStack {
 
-    private final List<Integer> stack = new ArrayList<>();
+    private final Stack<Integer> stack = new Stack<>();
+    private final Stack<Integer> minStack = new Stack<>();
+    private final Stack<Integer> maxStack = new Stack<>();
 
     @Override
     public void push(final int value) {
-        this.stack.add(value);
+        stack.push(value);
+
+        if (minStack.isEmpty() || value <= minStack.peek()) {
+            minStack.push(value);
+        } else {
+            minStack.push(minStack.peek());
+        }
+
+        if (maxStack.isEmpty() || value >= maxStack.peek()) {
+            maxStack.push(value);
+        } else {
+            maxStack.push(maxStack.peek());
+        }
     }
 
     @Override
@@ -19,7 +32,7 @@ public final class MinMaxStackImpl implements MinMaxStack {
         if (this.stack.isEmpty()) {
             throw new IllegalStateException("Stack is empty");
         }
-        return this.stack.remove(this.stack.size() - 1);
+        return this.stack.pop();
     }
 
     @Override
@@ -27,12 +40,15 @@ public final class MinMaxStackImpl implements MinMaxStack {
         if (this.stack.isEmpty()) {
             throw new IllegalStateException("Stack is empty");
         }
-        return this.stack.get(this.stack.size() - 1);
+        return this.stack.peek();
     }
 
     @Override
     public int getMin() {
-        return 0;
+        if (minStack.isEmpty()) {
+            throw new IllegalStateException("Stack is empty");
+        }
+        return minStack.peek();
     }
 
     @Override
