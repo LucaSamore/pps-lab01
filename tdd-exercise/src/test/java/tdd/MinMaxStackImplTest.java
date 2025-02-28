@@ -11,6 +11,8 @@ final class MinMaxStackImplTest {
 
     private MinMaxStack stack;
 
+    private static final int VALUE = 10;
+
     @BeforeEach
     void beforeEach() {
         this.stack = new MinMaxStackImpl();
@@ -21,5 +23,10 @@ final class MinMaxStackImplTest {
         assertTrue(stack.isEmpty());
     }
 
+    @Test
+    void testPushElement() {
+        this.stack.push(VALUE);
+        assertEquals(1, this.stack.size());
+    }
 
 }

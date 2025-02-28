@@ -11,7 +11,7 @@ public final class MinMaxStackImpl implements MinMaxStack {
 
     @Override
     public void push(final int value) {
-
+        this.stack.add(value);
     }
 
     @Override
@@ -41,6 +41,6 @@ public final class MinMaxStackImpl implements MinMaxStack {
 
     @Override
     public int size() {
-        return 0;
+        return this.stack.size();
     }
 }
