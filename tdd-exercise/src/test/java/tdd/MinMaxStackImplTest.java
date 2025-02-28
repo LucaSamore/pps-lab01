@@ -11,9 +11,9 @@ import static org.junit.jupiter.api.Assertions.*;
 
 final class MinMaxStackImplTest {
 
-    private MinMaxStack stack;
-
     private static final int VALUE = 10;
+
+    private MinMaxStack stack;
 
     @BeforeEach
     void beforeEach() {

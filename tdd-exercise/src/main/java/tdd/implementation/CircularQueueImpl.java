@@ -3,7 +3,6 @@ package tdd.implementation;
 import tdd.CircularQueue;
 
 import java.util.ArrayDeque;
-import java.util.LinkedList;
 import java.util.Queue;
 
 public final class CircularQueueImpl implements CircularQueue {
@@ -21,6 +20,9 @@ public final class CircularQueueImpl implements CircularQueue {
 
     @Override
     public void enqueue(final int value) {
+        if (isFull()) {
+            dequeue();
+        }
         this.queue.add(value);
     }
 
@@ -30,11 +32,6 @@ public final class CircularQueueImpl implements CircularQueue {
             throw new IllegalStateException("Queue is empty");
         }
         return this.queue.remove();
-    }
-
-    @Override
-    public int peek() {
-        return 0;
     }
 
     @Override
@@ -50,5 +47,9 @@ public final class CircularQueueImpl implements CircularQueue {
     @Override
     public int getCapacity() {
         return this.capacity;
+    }
+
+    private boolean isFull() {
+        return this.queue.size() == this.capacity;
     }
 }

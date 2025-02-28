@@ -1,10 +1,10 @@
 package tdd;
 
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import tdd.implementation.CircularQueueImpl;
-import tdd.implementation.MinMaxStackImpl;
+
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -13,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.*;
  */
 final class CircularListTest {
 
-    private static final int CAPACITY = 10;
+    private static final int CAPACITY = 3;
 
     private CircularQueue queue;
 
@@ -58,6 +58,18 @@ final class CircularListTest {
     @Test
     void testDequeueAnEmptyQueue() {
         assertThrows(IllegalStateException.class, () -> this.queue.dequeue());
+    }
+
+    @Test
+    void testEnqueueWhenQueueIsFull() {
+        List.of(1, 2, 3).forEach(this.queue::enqueue);
+        this.queue.enqueue(4);
+        assertAll(
+            () -> assertEquals(2, this.queue.dequeue()),
+            () -> assertEquals(3, this.queue.dequeue()),
+            () -> assertEquals(4, this.queue.dequeue()),
+            () -> assertTrue(this.queue.isEmpty())
+        );
     }
 
 }
