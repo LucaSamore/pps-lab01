@@ -53,7 +53,20 @@ final class MinMaxStackImplTest {
             () -> assertEquals(2, this.stack.pop()),
             () -> assertEquals(1, this.stack.pop())
         );
+    }
 
+    @Test
+    void testPeekElement() {
+        this.stack.push(VALUE);
+        assertAll(
+            () -> assertEquals(VALUE, this.stack.peek()),
+            () -> assertFalse(this.stack.isEmpty())
+        );
+    }
+
+    @Test
+    void testPeekEmptyStack() {
+        assertThrows(IllegalStateException.class, () -> this.stack.peek());
     }
 
 }
