@@ -53,7 +53,10 @@ public final class MinMaxStackImpl implements MinMaxStack {
 
     @Override
     public int getMax() {
-        return 0;
+        if (maxStack.isEmpty()) {
+            throw new IllegalStateException("Stack is empty");
+        }
+        return maxStack.peek();
     }
 
     @Override
