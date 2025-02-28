@@ -36,4 +36,13 @@ final class CircularListTest {
         assertThrows(IllegalArgumentException.class, () -> new CircularQueueImpl(-12));
     }
 
+    @Test
+    void testEnqueue() {
+        this.queue.enqueue(1);
+        assertAll(
+            () -> assertFalse(this.queue.isEmpty()),
+            () -> assertEquals(1, this.queue.size())
+        );
+    }
+
 }

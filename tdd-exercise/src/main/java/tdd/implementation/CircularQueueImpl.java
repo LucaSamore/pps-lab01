@@ -21,7 +21,7 @@ public final class CircularQueueImpl implements CircularQueue {
 
     @Override
     public void enqueue(final int value) {
-
+        this.queue.add(value);
     }
 
     @Override
