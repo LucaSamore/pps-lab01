@@ -45,4 +45,19 @@ final class CircularListTest {
         );
     }
 
+    @Test
+    void testDequeue() {
+        this.queue.enqueue(1);
+        this.queue.dequeue();
+        assertAll(
+            () -> assertTrue(this.queue.isEmpty()),
+            () -> assertEquals(0, queue.size())
+        );
+    }
+
+    @Test
+    void testDequeueAnEmptyQueue() {
+        assertThrows(IllegalStateException.class, () -> this.queue.dequeue());
+    }
+
 }
