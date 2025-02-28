@@ -15,13 +15,39 @@ package tdd;
  */
 public interface CircularQueue {
 
+    /**
+     * Enqueues an integer onto the queue.
+     *
+     * @param value The integer to enqueue.
+     */
     void enqueue(int value);
 
+    /**
+     * Removes and returns the tail of the queue.
+     *
+     * @return The dequeued element.
+     * @throws IllegalStateException if the queue is empty.
+     */
     int dequeue();
 
+    /**
+     * Checks if the queue is empty.
+     *
+     * @return true if the queue is empty, false otherwise.
+     */
     boolean isEmpty();
 
+    /**
+     * Gets the number of elements currently in the queue.
+     *
+     * @return The size of the queue.
+     */
     int size();
 
+    /**
+     * Gets the capacity of the queue, i.e., the maximum number of elements that can be stored.
+     *
+     * @return The capacity of the queue.
+     */
     int getCapacity();
 }
