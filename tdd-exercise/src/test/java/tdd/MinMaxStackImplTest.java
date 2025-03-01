@@ -3,8 +3,6 @@ package tdd;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import tdd.implementation.MinMaxStackImpl;
-
-import java.util.Collections;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -73,9 +71,8 @@ final class MinMaxStackImplTest {
 
     @Test
     void testGetMin() {
-        final var elements = List.of(1, 2, 3);
-        elements.forEach(this.stack::push);
-        assertEquals(Collections.min(elements), this.stack.getMin());
+        List.of(1, 2, 3).forEach(this.stack::push);
+        assertEquals(1, this.stack.getMin());
     }
 
     @Test
@@ -85,9 +82,8 @@ final class MinMaxStackImplTest {
 
     @Test
     void testGetMax() {
-        final var elements = List.of(1, 2, 3);
-        elements.forEach(this.stack::push);
-        assertEquals(Collections.max(elements), this.stack.getMax());
+        List.of(1, 2, 3).forEach(this.stack::push);
+        assertEquals(3, this.stack.getMax());
     }
 
     @Test
@@ -97,8 +93,7 @@ final class MinMaxStackImplTest {
 
     @Test
     void testGetMinWithDifferentStackStatus() {
-        final var elements = List.of(3, 2, 1);
-        elements.forEach(this.stack::push);
+        List.of(3, 2, 1).forEach(this.stack::push);
         assertAll(
             () -> assertEquals(1, this.stack.getMin()),
             () -> assertEquals(1, this.stack.pop()),
@@ -108,8 +103,7 @@ final class MinMaxStackImplTest {
 
     @Test
     void testGetMaxWithDifferentStackStatus() {
-        final var elements = List.of(1, 2, 3);
-        elements.forEach(this.stack::push);
+        List.of(1, 2, 3).forEach(this.stack::push);
         assertAll(
             () -> assertEquals(3, this.stack.getMax()),
             () -> assertEquals(3, this.stack.pop()),

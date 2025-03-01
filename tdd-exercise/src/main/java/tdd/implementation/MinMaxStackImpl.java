@@ -7,34 +7,34 @@ import java.util.Stack;
 public final class MinMaxStackImpl implements MinMaxStack {
 
     private final Stack<Integer> stack = new Stack<>();
-    private final Stack<Integer> minStack = new Stack<>();
-    private final Stack<Integer> maxStack = new Stack<>();
+    private final Stack<Integer> min = new Stack<>();
+    private final Stack<Integer> max = new Stack<>();
 
     @Override
     public void push(final int value) {
-        stack.push(value);
+        this.stack.push(value);
 
-        if (minStack.isEmpty() || value <= minStack.peek()) {
-            minStack.push(value);
+        if (this.min.isEmpty() || value <= this.min.peek()) {
+            this.min.push(value);
         } else {
-            minStack.push(minStack.peek());
+            this.min.push(min.peek());
         }
 
-        if (maxStack.isEmpty() || value >= maxStack.peek()) {
-            maxStack.push(value);
+        if (this.max.isEmpty() || value >= this.max.peek()) {
+            this.max.push(value);
         } else {
-            maxStack.push(maxStack.peek());
+            this.max.push(max.peek());
         }
     }
 
     @Override
     public int pop() {
-        if (stack.isEmpty()) {
+        if (this.stack.isEmpty()) {
             throw new IllegalStateException("Stack is empty");
         }
-        minStack.pop();
-        maxStack.pop();
-        return stack.pop();
+        this.min.pop();
+        this.max.pop();
+        return this.stack.pop();
     }
 
     @Override
@@ -47,18 +47,18 @@ public final class MinMaxStackImpl implements MinMaxStack {
 
     @Override
     public int getMin() {
-        if (minStack.isEmpty()) {
+        if (this.min.isEmpty()) {
             throw new IllegalStateException("Stack is empty");
         }
-        return minStack.peek();
+        return this.min.peek();
     }
 
     @Override
     public int getMax() {
-        if (maxStack.isEmpty()) {
+        if (this.max.isEmpty()) {
             throw new IllegalStateException("Stack is empty");
         }
-        return maxStack.peek();
+        return this.max.peek();
     }
 
     @Override

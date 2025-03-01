@@ -34,7 +34,7 @@ public final class SmartDoorLockImpl implements SmartDoorLock {
     }
 
     @Override
-    public void unlock(final int pin) {
+    public void unlock(final int pin) throws IllegalArgumentException {
         if (!isLocked()) {
             return;
         }
@@ -50,7 +50,7 @@ public final class SmartDoorLockImpl implements SmartDoorLock {
         if (pinIsNotSet()) {
             throw new IllegalStateException("PIN is not set");
         }
-        lockState = LockState.LOCKED;
+        this.lockState = LockState.LOCKED;
     }
 
     @Override
@@ -84,7 +84,7 @@ public final class SmartDoorLockImpl implements SmartDoorLock {
         return this.pin == null;
     }
 
-    private boolean pinIsIncorrect(final int pin) {
+    private boolean pinIsIncorrect(final int pin) throws IllegalArgumentException {
         final var givenPin = new FourDigitPin(pin);
         return !this.pin.equals(givenPin);
     }
